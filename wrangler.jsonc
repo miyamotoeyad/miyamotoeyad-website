@@ -1,5 +1,5 @@
 {
-	"main": "dist/_worker.js/index.js",
+	"main": "@astrojs/cloudflare/entrypoints/server",
 	"name": "miyamotoeyad-website",
   "compatibility_date": "2026-10-09",
   "compatibility_flags": [
