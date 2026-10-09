@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.3.4",
-    "@astrojs/node": "^9.0.0",
-    "astro": "^5.0.0",
+    "@astrojs/node": "^11.1.7",
+    "astro": "^7.3.8",
     "simple-icons": "^16.34.0",
     "typescript": "^5.6.0",
     "wrangler": "^4.149.0"
