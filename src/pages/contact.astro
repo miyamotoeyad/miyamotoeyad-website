@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { author, Social } from '@/lib/site';
+ '@/lib/SoicalLinks';
+---
+<Base title={"أتواصل معايا"}>
+  <h1 class="title">{author}</h1>
+  <p class="byline">{"معاك أجمد معرب في درب التبانة"}</p>
+  <h2>أتواصل معايا</h2>
+  <ul class="social">
+    {Social.map((s) => (
+      <li><a class="cut" href={s.url} target="_blank" rel="noopener noreferrer">
+        <strong>{s.name}</strong>
+      </a></li>
+    ))}
+  </ul>
+</Base>

@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { readingTime } from '../../lib/readingTime';
+const posts = (await getCollection('blog')).sort((a, b) => +b.data.date - +a.data.date);
+const title = "المقالات"
+const desc = "هنا هتلاقي كل مقالات عن التعريبات بتفاصيلها."
+---
+<Base title={title} description={desc}>
+  <h1 class="title">{title}</h1>
+  <p class="byline">{desc}</p>
+  <ul class="posts" style="margin-top:2rem">
+    {posts.map((p) => (
+      <li><a class="cut" href={`/blog/${p.id}`}>
+        <h3>{p.data.title}</h3><p>{p.data.description}</p>
+        <small>{readingTime(p.body)} وقت القراءة</small>
+      </a></li>
+    ))}
+  </ul>
+</Base>

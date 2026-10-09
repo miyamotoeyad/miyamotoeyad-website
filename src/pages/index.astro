@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import GameCard from '../components/GameCard.astro';
+import { achievements } from '../data/site';
+
+const games = (await getCollection('games')).sort((a, b) => +b.data.date - +a.data.date);
+const current = (await getCollection('current')).sort((a, b) => +b.data.date - +a.data.date)[0];
+const Note = current ? (await render(current)).Content : null;
+const stats = [{ value: games.length, label: 'تعريب منشور' }, ...achievements];
+---
+<Base>
+  <section class="hero">
+    <h1>ألعب بالعربي أحسن لك</h1>
+    <p>معك أجمد معرب في درب التبانة</p>
+  </section>
+
+  {current && Note && (
+    <section class="now cut" aria-labelledby="now-title">
+      <div class="art">{current.data.cover && <img src={current.data.cover} alt="" />}</div>
+      <div class="body">
+        <p class="status">شغال عليها دلوقتي</p>
+        <h2 id="now-title">{current.data.title}</h2>
+        <div class="prose"><Note /></div>
+        <div class="xp" role="progressbar" aria-label="نسبة التقدم" aria-valuemin="0" aria-valuemax="100" aria-valuenow={current.data.progress}>
+          <i style={`width:${current.data.progress}%`}></i>
+        </div>
+        <p class="xp-label">{current.data.progress}% خلص</p>
+      </div>
+    </section>
+  )}
+
+  <section id="games">
+    <h2>آخر تعريب عملته</h2>
+    {games.length ? <ul class="grid">{games.map((game) => <GameCard game={game} />)}</ul> : <p>مفيش لعبة، استنى عليا</p>}
+  </section>
+
+  <section aria-labelledby="ach">
+    <h2 id="ach">إنجازاتي</h2>
+    <ul class="stats">
+      {stats.map((s) => <li class="cut"><strong>{s.value}</strong><span>{s.label}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="cta cut">
+    <h2>عايز تعريب للعبة تانية؟</h2>
+    <p>قولي اسم اللعبة وأنا أبص عليها.</p>
+    <a class="btn cut" href="/contact">كلمني</a>
+  </section>
+</Base>

@@ -1,0 +1,24 @@
+---
+import { Social } from "@/lib/site";
+
+const fallback = 'M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6V3h2zM5 19h14v2H5z';
+---
+<footer class="site">
+  <div class="wrap foot">
+    <span>مفيش ملفات اللعبة الأصلي وانت هتبقي مسؤول عن اي تحميل هنا</span>
+    <nav aria-label="Social">
+      {Social.map((s) => (
+        <a class="with-icon" href={s.url} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d={s.icon?.path ?? fallback} />
+          </svg>
+          {s.name}
+        </a>
+      ))}
+    </nav>
+    <nav aria-label="Legal">
+      <a href="/privacy">سياسة الخصوصية</a>
+      <a href="/terms">الشروط والأحكام</a>
+    </nav>
+  </div>
+</footer>

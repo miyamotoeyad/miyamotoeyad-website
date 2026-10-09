@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { readingTime } from '../../lib/readingTime';
+
+export async function getStaticPaths() {
+  return (await getCollection('blog')).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={post.data.title} description={post.data.description}>
+  <article>
+    <h1 class="title">{post.data.title}</h1>
+    <p class="byline">
+      {post.data.date.toLocaleDateString()} · {readingTime(post.body)} وقت القراءة ·
+      <span data-count={`/api/hit/reads/${post.id}`} data-hit>…</span> عدد مرات القراءة
+    </p>
+    <div class="prose" style="margin-top:2rem"><Content /></div>
+  </article>
+</Base>

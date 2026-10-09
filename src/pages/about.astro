@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title  = "أنا مين؟"
+const desc = "أتعرف عني أكتر واكتر"
+---
+<Base title={title} description={desc}>
+  <h1 class="title">{title}</h1>
+  <div class="prose" style="margin-top:1.5rem"><p>{desc}</p></div>
+</Base>

@@ -1,0 +1,106 @@
+{
+  "$ref": "#/definitions/games",
+  "definitions": {
+    "games": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "cover": {
+          "type": "string"
+        },
+        "youtube": {
+          "type": "string"
+        },
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "publish": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "update": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string",
+          "default": "PC"
+        },
+        "translated": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "baseDownloads": {
+          "type": "number",
+          "default": 0
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "youtube",
+        "downloadUrl",
+        "publish",
+        "update",
+        "version",
+        "translated",
+        "date"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

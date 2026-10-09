@@ -1,0 +1,36 @@
+---
+import GameCard from "@/components/GameCard.astro";
+import Base from "@/layouts/Base.astro";
+import { achievements } from "@/lib/site";
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+const title = "كل التعريبات";
+const desc = "هنا هتلاقي كل تعريباتي هنا";
+
+const games = (await getCollection("games")).sort(
+  (a, b) => +b.data.date - +a.data.date,
+);
+const current = (await getCollection("current")).sort(
+  (a, b) => +b.data.date - +a.data.date,
+)[0];
+---
+
+<Base title={title} description={desc}>
+  <h1 class="title">
+    {title}
+  </h1>
+  <section id="games">
+    <h2>آخر تعريب عملته</h2>
+    {
+      games.length ? (
+        <ul class="grid">
+          {games.map((game) => (
+            <GameCard game={game} />
+          ))}
+        </ul>
+      ) : (
+        <p>مفيش لعبة، استنى عليا</p>
+      )
+    }
+  </section>
+</Base>

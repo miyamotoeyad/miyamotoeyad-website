@@ -1,0 +1,39 @@
+---
+import Footer from '@/components/Footer.astro';
+import '../styles/global.css';
+interface Props { title?: string; description?: string }
+const { title, description } = Astro.props;
+import Navbar from "@/components/Navbar.astro"
+---
+<!doctype html>
+<html lang={"Eg-ar"} dir={"rtl"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title ? `${title} | MiyamotoEyad` : "MiyamotoEyad"}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip</a>
+    <Navbar />
+    <main id="main" class="wrap"><slot /></main>
+    <Footer />
+
+    <script>
+      // [data-count] elements load a live number; [data-hit] counts one read per browser session.
+      const fmt = (n: number) => n.toLocaleString(document.documentElement.lang);
+      document.querySelectorAll<HTMLElement>('[data-count]').forEach(async (el) => {
+        const url = el.dataset.count!;
+        const first = el.hasAttribute('data-hit') && !sessionStorage.getItem(url);
+        try {
+          const { count } = await (await fetch(url, { method: first ? 'POST' : 'GET' })).json();
+          if (first) sessionStorage.setItem(url, '1');
+          el.textContent = fmt(count + Number(el.dataset.base ?? 0));
+        } catch { el.textContent = fmt(Number(el.dataset.base ?? 0)); }
+      });
+    </script>
+  </body>
+</html>

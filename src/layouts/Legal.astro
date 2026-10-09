@@ -1,0 +1,9 @@
+---
+import Base from './Base.astro';
+const { frontmatter } = Astro.props;
+---
+<Base title={frontmatter.title}>
+  <h1 class="title">{frontmatter.title}</h1>
+  <p class="byline">آخر تحديث: {frontmatter.updated}</p>
+  <div class="prose" style="margin-top:2rem"><slot /></div>
+</Base>

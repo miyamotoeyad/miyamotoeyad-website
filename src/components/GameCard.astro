@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { game: CollectionEntry<'games'> }
+const { game } = Astro.props;
+---
+<li>
+  <a class="card cut" href={`/games/${game.id}`}>
+    <div class="art">{game.data.cover && <img src={game.data.cover} alt="" loading="lazy" />}</div>
+    <div class="info"><h3>{game.data.title}</h3><small>{game.data.platform}</small></div>
+  </a>
+</li>

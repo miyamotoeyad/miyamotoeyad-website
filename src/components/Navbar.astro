@@ -1,0 +1,31 @@
+---
+const path = Astro.url.pathname;
+const nav = [
+  ["/", "الصفحة الرئيسية"],
+  ["/games", "التعريبات"],
+  ["/blog", "المدونات"],
+  ["/about", "أنا مين؟"],
+] as const;
+---
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">MiyamotoEyad</a>
+    <nav aria-label="Main">
+      {
+        nav.map(([href, label]) => (
+          <a
+            href={href}
+            aria-current={
+              (href === "/" ? path === "/" : path.startsWith(href))
+                ? "page"
+                : undefined
+            }
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
